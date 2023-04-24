@@ -1,0 +1,98 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0ece9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.13);
+}
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-color:black;
+}
+.table th, .table td {
+    padding: 4px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+.table th {
+    font-weight: bold;
+    color: #333;
+}
+#btn1 {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: green;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+#btn2 {
+    color: red; /* 将文字颜色改为红色 */
+    text-decoration: none; /* 去掉下划线 */
+    font-size: 16px; /* 改变字体大小 */
+    font-weight: bold; /* 加粗文字 */
+    padding: 5px 10px; /* 添加内边距 */
+    border: 1px solid red; /* 添加边框 */
+    border-radius: 5px; /* 圆角边框 */
+    cursor: pointer; /* 将鼠标样式改为手型 */
+}
+/*第一行*/
+#top
+{
+    height: 40px;
+    text-align: center;
+}
+.headerLine
+{
+    width: 20%;
+    display: inline;
+    color: #c3a080;
+    font-size: 25px;
+}
+#header
+{
+    width: 50%;
+    display: inline;
+    color: #9ea09e;
+    font-size: 20px;
+    padding-left: 112px;
+    padding-right: 112px;
+}
+.link{
+    color: red;!important;
+}
+#welcome{
+    position: absolute;
+    right: 10%;
+    font-size: medium;
+    top:75px;
+}
+a.update, a.delete {
+    color: #333; /* 设置链接颜色 */
+    text-decoration: none; /* 去除下划线 */
+    font-size: 14px; /* 改变字体大小 */
+    margin-right: 10px; /* 添加间距 */
+}
+
+a.update:hover, a.delete:hover {
+    color: red; /* 设置链接悬停时的颜色 */
+    cursor: pointer; /* 将鼠标样式改为手型 */
+    text-decoration: underline; /* 添加下划线 */
+}
+img.course-img{
+    width: 40px;
+    height: 40px;
+}
+

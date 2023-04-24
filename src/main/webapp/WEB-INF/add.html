@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--    以让网页更加适应于不同的移动设备，并提供更好的用户体验-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 禁用浏览器缓存-->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>添加课程</title>
+    <link rel="stylesheet" href="../static/css/add.css" type="text/css">
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+    <form id="signup-form" action="../course/add_solve" method="post" enctype="multipart/form-data">
+        <h2 class="form-title">添加课程</h2>
+        <div class="form-group">
+            <label for="course-image">课程图片(若未选择图片则使用默认课程图)</label>
+            <input type="file" accept="image/*" id="course-image" name="imageFile" required >
+        </div>
+        <div class="form-group">
+            <label for="course-name">课程名称*</label>
+            <input type="text" id="course-name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="course-hours">课时*</label>
+            <input type="number" id="course-hours" name="hours" required min="1">
+        </div>
+        <div class="form-group">
+            <label for="college">所属学院*</label>
+            <select id="college" name="schools" required class="short-input">
+                <option value="">请选择学院</option>
+            </select>
+        </div>
+        <button type="submit" class="btn-submit" id="btn-submit">添加课程</button>
+        <button type="button" class="btn-exit" id="btn-exit">退出</button>
+    </form>
+</body>
+    <script src="../static/js/add.js"></script>
+</html>

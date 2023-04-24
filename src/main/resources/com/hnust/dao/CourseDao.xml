@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hnust.dao.CourseDao">
+<!--    左边为数据库表中的列名，右边为映射类名-->
+    <resultMap id="courseResultMap" type="com.hnust.entity.Course">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="hours" property="hours"/>
+        <result column="schools" property="schools"/>
+        <result column="image" property="image"/>
+    </resultMap>
+
+    <insert id="insertAutoId" useGeneratedKeys="true" keyProperty="id">
+        insert into c_course (id,name,hours,schools,image)
+        values (#{id}, #{name}, #{hours}, #{schools},#{image});
+    </insert>
+    <update id="update">
+        update c_course
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="hours != null">
+                hours = #{hours},
+            </if>
+            <if test="schools != null and schools != ''">
+                schools = #{schools},
+            </if>
+            <if test="image != null and image != ''">
+                image = #{image},
+            </if>
+        </set>
+        where id = #{id};
+    </update>
+    <delete id="deleteById">
+        delete from c_course where id = #{id};
+    </delete>
+
+    <select id="selectAll" resultMap="courseResultMap">
+        select *
+        from c_course;
+    </select>
+    <select id="selectById" resultMap="courseResultMap">
+        select *
+            from c_course
+        where id = #{id};
+    </select>
+    <select id="selectBycName" resultMap="courseResultMap">
+        select *
+        from c_course
+        where name = #{name};
+    </select>
+    <select id="selectByCondition" resultMap="courseResultMap">
+        select *
+        from c_course
+        /* where 1 = 1*/
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != '' ">
+                and name like #{name}
+            </if>
+            <if test="schools != null and schools != ''">
+                and schools = #{schools},
+            </if>
+        </where>
+    </select>
+    <select id="selectByConditionSingle" resultMap="courseResultMap">
+        select *
+        from c_course
+        <where>
+            <choose><!--相当于switch-->
+                <when test="id != null"><!--相当于case-->
+                    id = #{id}
+                </when>
+                <when test="name != null and name != '' "><!--相当于case-->
+                    name like #{name}
+                </when>
+            </choose>
+        </where>
+    </select>
+    <select id="selectByscName" resultMap="courseResultMap">
+        select *
+            from c_course
+        where schools IN(
+            select id from s_school where school_name=#{name}
+            )
+    </select>
+    <select id="selectImage" resultType="String">
+        select image from c_course where id=#{id}
+    </select>
+</mapper>
