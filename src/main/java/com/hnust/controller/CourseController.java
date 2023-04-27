@@ -141,6 +141,7 @@ public class CourseController {
         if(success.equals(true)) {
             try {
                 String imageName=null;
+                //是否添加课程图片
                 if (ObjectUtils.isEmpty(imageFile) || imageFile.getSize() <= 0) {
                     imageName = "c974612e-552b-4733-9d0d-9286c4af620c.png";//默认图片
                     System.out.println(imageName+"我是null");
@@ -193,7 +194,9 @@ public class CourseController {
         if(success.equals(true)) {
             try {
                 String imageName=courseService.selectImage(id);
+                //是否修改课程图片
                 if (!ObjectUtils.isEmpty(imageFile) && imageFile.getSize() > 0) {
+                    // 判断上传的文件是否为图片类型
                     if (!imageFile.getContentType().startsWith("image/")) {
                         result.setMsg("imagefail");
                         result.setCode(200);

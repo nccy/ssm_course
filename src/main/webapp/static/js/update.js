@@ -71,6 +71,7 @@ document.getElementById("btn-exit").onclick = function (){
     location.href = "/course/main_page";
     return false;
 }
+//回显图片
 $('#course-image').on('change', function() {
     var file = this.files[0];
     var reader = new FileReader();
