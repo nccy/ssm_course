@@ -145,24 +145,29 @@ public class CourseController {
                     imageName = "c974612e-552b-4733-9d0d-9286c4af620c.png";//默认图片
                     System.out.println(imageName+"我是null");
                 }else{
-                    imageName = UUID.randomUUID() + "." + StringUtils.getFilenameExtension(imageFile.getOriginalFilename());
-                    // 生成图片文件名
-                    String imagePath = "F:\\IEDAUltimate\\code\\save\\images\\" + imageName;
-                    // 将图片保存到磁盘
-                    Path imageFilePath = Paths.get(imagePath);
-                    Files.write(imageFilePath, imageFile.getBytes());
-                    System.out.println(imageName+"我不是null");
+                    // 判断上传的文件是否为图片类型
+                    if (!imageFile.getContentType().startsWith("image/")) {
+                        result.setMsg("imagefail");
+                    }else{
+                        imageName = UUID.randomUUID() + "." + StringUtils.getFilenameExtension(imageFile.getOriginalFilename());
+                        // 生成图片文件名
+                        String imagePath = "F:\\IEDAUltimate\\code\\save\\images\\" + imageName;
+                        // 将图片保存到磁盘
+                        Path imageFilePath = Paths.get(imagePath);
+                        Files.write(imageFilePath, imageFile.getBytes());
+                        System.out.println(imageName+"我不是null");
+                        Course course =new Course(null,imageName,name,hours,schools);
+                        courseService.insertAutoId(course);
+                        System.out.println("{'module':'course save success'}");
+                        result.setMsg("success");
+                    }
                 }
-                Course course =new Course(null,imageName,name,hours,schools);
-                courseService.insertAutoId(course);
-                System.out.println("{'module':'course save success'}");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            result.setMsg("success");
         }else{
             System.out.println("{'module':'course save fail'}");
-            result.setMsg("fail");
+            result.setMsg("namefail");
         }
         result.setCode(200);
         return result;
@@ -187,23 +192,27 @@ public class CourseController {
             try {
                 String imageName=courseService.selectImage(id);
                 if (!ObjectUtils.isEmpty(imageFile) && imageFile.getSize() > 0) {
-                    imageName = UUID.randomUUID() + "." + StringUtils.getFilenameExtension(imageFile.getOriginalFilename());
-                    // 生成图片文件名
-                    String imagePath = "F:\\IEDAUltimate\\code\\save\\images\\" + imageName;
-                    // 将图片保存到磁盘
-                    Path imageFilePath = Paths.get(imagePath);
-                    Files.write(imageFilePath, imageFile.getBytes());
-                    System.out.println(imageName+"我不是null");
+                    if (!imageFile.getContentType().startsWith("image/")) {
+                        result.setMsg("imagefail");
+                    }else{
+                        imageName = UUID.randomUUID() + "." + StringUtils.getFilenameExtension(imageFile.getOriginalFilename());
+                        // 生成图片文件名
+                        String imagePath = "F:\\IEDAUltimate\\code\\save\\images\\" + imageName;
+                        // 将图片保存到磁盘
+                        Path imageFilePath = Paths.get(imagePath);
+                        Files.write(imageFilePath, imageFile.getBytes());
+                        System.out.println(imageName+"我不是null");
+                        Course course =new Course(id,imageName,name,hours,schools);
+                        courseService.update(course);
+                        System.out.println(course+"{'module':'course update success'}");
+                        result.setMsg("success");
+                    }
                 }
-                Course course =new Course(id,imageName,name,hours,schools);
-                courseService.update(course);
-                System.out.println(course+"{'module':'course update success'}");
-                result.setMsg("success");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }else{
-            result.setMsg("fail");
+            result.setMsg("namefail");
             System.out.println("{'module':'course update fail'}");
         }
         result.setCode(200);

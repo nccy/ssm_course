@@ -22,7 +22,9 @@ $(function () {
                         location.href = "/course/main_page";
                         return false;
                     }
-                } else {
+                } else if(result.msg==="imagefail"){
+                    alert("添加失败———你上传的图片文件有误！请重新上传正确的图片文件后再次重试————o(╥﹏╥)");
+                }else{
                     alert("添加失败———你输入的课程名已经存在！请修改课程名称后再次重试————o(╥﹏╥)");
                 }
             },
