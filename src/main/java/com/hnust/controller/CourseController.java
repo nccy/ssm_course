@@ -140,7 +140,7 @@ public class CourseController {
         }
         if(success.equals(true)) {
             try {
-                String imageName;
+                String imageName=null;
                 if (ObjectUtils.isEmpty(imageFile) || imageFile.getSize() <= 0) {
                     imageName = "c974612e-552b-4733-9d0d-9286c4af620c.png";//默认图片
                     System.out.println(imageName+"我是null");
@@ -148,6 +148,7 @@ public class CourseController {
                     // 判断上传的文件是否为图片类型
                     if (!imageFile.getContentType().startsWith("image/")) {
                         result.setMsg("imagefail");
+                        return result;
                     }else{
                         imageName = UUID.randomUUID() + "." + StringUtils.getFilenameExtension(imageFile.getOriginalFilename());
                         // 生成图片文件名
@@ -156,12 +157,12 @@ public class CourseController {
                         Path imageFilePath = Paths.get(imagePath);
                         Files.write(imageFilePath, imageFile.getBytes());
                         System.out.println(imageName+"我不是null");
-                        Course course =new Course(null,imageName,name,hours,schools);
-                        courseService.insertAutoId(course);
-                        System.out.println("{'module':'course save success'}");
-                        result.setMsg("success");
                     }
                 }
+                Course course =new Course(null,imageName,name,hours,schools);
+                courseService.insertAutoId(course);
+                System.out.println("{'module':'course save success'}");
+                result.setMsg("success");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -179,6 +180,7 @@ public class CourseController {
                                @RequestParam("name") String name, @RequestParam("hours") Integer hours,
                                @RequestParam("schools") Integer schools
     ){
+        System.out.println("-----------------update");
         List<Course> courses=courseService.selectAll();
         Boolean success =true;
         for(Course res :courses)
@@ -194,6 +196,8 @@ public class CourseController {
                 if (!ObjectUtils.isEmpty(imageFile) && imageFile.getSize() > 0) {
                     if (!imageFile.getContentType().startsWith("image/")) {
                         result.setMsg("imagefail");
+                        result.setCode(200);
+                        return result;
                     }else{
                         imageName = UUID.randomUUID() + "." + StringUtils.getFilenameExtension(imageFile.getOriginalFilename());
                         // 生成图片文件名
@@ -202,12 +206,13 @@ public class CourseController {
                         Path imageFilePath = Paths.get(imagePath);
                         Files.write(imageFilePath, imageFile.getBytes());
                         System.out.println(imageName+"我不是null");
-                        Course course =new Course(id,imageName,name,hours,schools);
-                        courseService.update(course);
-                        System.out.println(course+"{'module':'course update success'}");
-                        result.setMsg("success");
                     }
                 }
+                Course course =new Course(id,imageName,name,hours,schools);
+                System.out.println(course+"--------------------update");
+                courseService.update(course);
+                System.out.println(course+"{'module':'course update success'}");
+                result.setMsg("success");
             } catch (IOException e) {
                 e.printStackTrace();
             }

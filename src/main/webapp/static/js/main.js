@@ -70,6 +70,6 @@ function deleteCourse(courseId){
 }
 //修改键处理
 function updateCourse(Id){
-    // 跳转到编辑页面
-    window.location.href = `/course/update_page?id=${Id}`;
+    // 跳转到编辑页面加上随机参数彻底解决浏览器缓存问题，不用手动刷新
+    window.location.href = `/course/update_page?id=${Id}&${Date.now()}`;
 }

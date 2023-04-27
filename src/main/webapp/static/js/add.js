@@ -57,3 +57,11 @@ document.getElementById("btn-exit").onclick = function (){
     location.href = "/course/main_page";
     return false;
 }
+$('#course-image').on('change', function() {
+    var file = this.files[0];
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        $('#image-preview').html('<img src="' + e.target.result + '">');
+    }
+    reader.readAsDataURL(file);
+});

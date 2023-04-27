@@ -86,3 +86,9 @@ select:focus {
 .btn-exit:hover {
     background-color: #ff2f2f;
 }
+#image-preview img {
+    max-width: 100px;
+    max-height: 100px;
+    display: block;
+    margin: 0 auto;
+}
