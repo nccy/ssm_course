@@ -153,7 +153,7 @@ public class CourseController {
                     }else{
                         imageName = UUID.randomUUID() + "." + StringUtils.getFilenameExtension(imageFile.getOriginalFilename());
                         // 生成图片文件名
-                        String imagePath = "F:\\IEDAUltimate\\code\\save\\images\\" + imageName;
+                        String imagePath = "F:\\IEDAUltimate\\code\\ssm_course\\src\\main\\webapp\\static\\save\\" + imageName;
                         // 将图片保存到磁盘
                         Path imageFilePath = Paths.get(imagePath);
                         Files.write(imageFilePath, imageFile.getBytes());
@@ -204,7 +204,7 @@ public class CourseController {
                     }else{
                         imageName = UUID.randomUUID() + "." + StringUtils.getFilenameExtension(imageFile.getOriginalFilename());
                         // 生成图片文件名
-                        String imagePath = "F:\\IEDAUltimate\\code\\save\\images\\" + imageName;
+                        String imagePath = "F:\\IEDAUltimate\\code\\ssm_course\\src\\main\\webapp\\static\\save\\" + imageName;
                         // 将图片保存到磁盘
                         Path imageFilePath = Paths.get(imagePath);
                         Files.write(imageFilePath, imageFile.getBytes());
